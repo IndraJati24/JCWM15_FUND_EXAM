@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PATTERN</title>
+  </head>
+  <body>
+    <h1>PATTERN</h1>
+    <input type="text" placeholder="masukkan angka" id="input" />
+    <button onclick="ganjil()" id="ganjil">GANJIL</button>
+    <button onclick="Huruf()">HURUF</button>
+    <div id="container">
+      <h1>RESULT :</h1>
+    </div>
+  </body>
+  <script>
+    let input = document.getElementById("input");
+    let div = document.getElementById("container");
+
+    let angka = [1, 2, 3, 4, 5, 6];
+    let huruf = ["A", "B", "C", "D", "E"];
+
+    function ganjil() {
+      console.log("ganjil");
+      let hasil = "";
+
+      if (input.value >= 4 || input.value < 0) {
+        alert("angka salah");
+      } else {
+        let n = input.value;
+        let temp = 0;
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j <= i; j++) {
+            hasil += 2 * temp + 1 + "&nbsp";
+            temp += 1;
+          }
+          hasil += "<br>";
+        }
+      }
+      div.innerHTML = `<h1>RESULT : <br> ${hasil}</h1>`;
+    }
+
+    function Huruf() {
+        console.log("huruf")
+        let hasil = "";
+
+      if (input.value >= 4 || input.value < 0) {
+        alert("angka salah");
+      } else {
+        let n = input.value;
+        let temp = 0;
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j <= i; j++) {
+            hasil += String.fromCharCode(65 +( 2* temp + 1 )) + "&nbsp"
+            temp += 1;
+          }
+          hasil += "<br>";
+        }
+      }
+      div.innerHTML = `<h1>RESULT : <br> ${hasil}</h1>`;
+    }
+  </script>
+</html>

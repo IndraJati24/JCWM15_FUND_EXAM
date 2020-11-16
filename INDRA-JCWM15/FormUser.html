@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form User</title>
+    <style>
+        table,
+      tr,
+      td,
+      th {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 10px;
+      }
+    </style>
+</head>
+<body>
+    <h1>FORM USERS</h1>
+    <form action="">
+        <input type="text" placeholder="username" id="user">
+        <input type="email" placeholder="email" id="email">
+        <label for="role">role</label>
+        <select name="role" id="role">
+            <option value="admin">admin</option>
+            <option value="user">user</option>
+        </select>
+        <br><br>
+
+        <button onclick="addUser(event)">ADD USER</button>
+
+    </form>
+    <br>
+    <h1>USERS DATA</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="users""></tbody>
+    </table>
+</body>
+<script>
+    let dataUser =[
+        {
+            nama : "alee",
+            email : "alee@gmail.com",
+            role : "admin",
+        },
+        {
+            nama : "jennie",
+            email : "jenniebp@gmail.com",
+            role : "user",
+        },
+        {
+            nama : "elsa",
+            email : "elsa@disney.com",
+            role : "admin",
+        }
+    ]
+
+    class UserBaru {
+        constructor(nama, email, role) {
+            this.nama = nama,
+            this.email = email,
+            this.role = role
+        }
+    }
+
+    function showUser(index){
+        let tbody = document.getElementById("users")
+        let tr = ""
+        for(let i= 0; i < dataUser.length; i++){
+            if(index == i){
+                tr+=`
+                <tr>
+                    <td>${i + 1}</td>
+                    <td><input type="text" id="edit_nama" value="${dataUser[i].nama}"></td>
+                    <td><input type="text" id="edit_email" value="${dataUser[i].email}"></td>
+                    <td>
+                        <select id="edit_role">
+                            <option value="admin">admin</option>
+                            <option value="user">user</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button onclick="Save(${i})">SAVE</button>
+                        <button onclick="Cancel()">CANCEL</button>
+
+                        </td>
+                    
+
+                    </tr>
+                `
+            }else{
+
+                tr +=`
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${dataUser[i].nama}</td>
+                        <td>${dataUser[i].email}</td>
+                        <td>${dataUser[i].role}</td>
+                        <td>
+                            <button onclick="Edit(${i})">EDIT</button>
+                            <button onclick="Delete(${i})">DELETE</button>
+                            </td>
+                        </tr>
+                `
+            }
+        }
+        console.log(dataUser)
+        tbody.innerHTML = tr
+    }
+    showUser()
+
+    function addUser(event){
+        console.log("user")
+        event.preventDefault()
+
+        let nama = document.getElementById("user").value
+        let email = document.getElementById("email").value
+        let role = document.getElementById("role").value
+        console.log(user)
+        console.log(email)
+        console.log(role)
+
+        if(user =="" || email==""){
+            alert("input masih kosong")
+        } else {
+            dataUser.push(new UserBaru(nama, email, role))
+            user
+            email
+            role
+        }
+       
+        document.getElementById("user").value =""
+        document.getElementById("email").value =""
+        showUser()
+
+    }
+
+    function Delete(index){
+        console.log("delete")
+
+        dataUser.splice(index, 1)
+
+        showUser()  
+    }
+
+    function Edit(index){
+        console.log("edit")
+
+        showUser(index)
+    }
+
+    function Cancel(){
+        showUser()
+    }
+
+    function Save(index){
+
+        let editNama = document.getElementById("edit_nama").value
+        let editEmail = document.getElementById("edit_email").value
+        let editRole = document.getElementById("edit_role").value
+
+        dataUser[index].nama = editNama
+        dataUser[index].email = editEmail
+        dataUser[index].role = editRole
+
+        showUser()
+    }
+
+</script>
+</html>

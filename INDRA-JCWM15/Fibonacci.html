@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deret Fibonacci</title>
+</head>
+<body>
+    <h1>DERET FIBONANCI</h1>
+    <label for="fibo">Masukkan angka :</label>
+    <input type="number" placeholder="Masukkan angka" id="fibo">
+    <br><br>
+    <button onclick="show()" id="show">SHOW</button>
+    <button onclick="ganjil()" id="show">GANJIL</button>
+    <button onclick="genap()" id="show">GENAP</button>
+    <br>
+    <div id="container""></div>
+</body>
+<script>
+let input = document.getElementById("fibo")
+console.log(input.value)
+
+let div= document.getElementById("container")
+console.log(div)
+
+let hasil =[0, 1]
+function show(){
+    console.log("show")
+    
+    let sebelum = 0
+    let sekarang = 1
+    
+    main : while(true){
+        let temp = sekarang
+
+        hasil.push(sekarang += sebelum)
+        sebelum = temp
+
+        if (sekarang > parseInt(input.value)){
+            break main
+        }
+
+    }
+
+    
+    div.innerHTML = `<h1> RESULT : <br> ${hasil}</h1>`
+
+}
+
+function ganjil(){
+    console.log("ganjil")
+
+    show()
+
+    let angkaGanjil = hasil.filter(function(hasil){
+        return hasil % 2 !== 0
+    })
+    console.log(angkaGanjil)
+
+    let joinGanjil = angkaGanjil.join("+")
+    console.log(joinGanjil)
+   
+
+    let reducer = (a, b) => a + b
+
+    let total = angkaGanjil.reduce(reducer)
+        
+    console.log(total)
+    div.innerHTML = `<h1>RESULT : <br> ${joinGanjil} = ${total} </h1>` 
+
+}
+
+function genap(){
+    console.log("genap")
+
+    show()
+
+    let angkaGenap = hasil.filter(function(hasil){
+        return hasil % 2 == 0
+    })
+
+    let joinGenap = angkaGenap.join("+")
+    console.log(joinGenap)
+
+    let reducer = (a, b) => a + b
+
+    let totalGenap = angkaGenap.reduce(reducer)
+    console.log(totalGenap)
+
+
+    div.innerHTML = `<h1>RESULT : <br> ${joinGenap} = ${totalGenap} </h1>`
+}
+</script>
+</html>
